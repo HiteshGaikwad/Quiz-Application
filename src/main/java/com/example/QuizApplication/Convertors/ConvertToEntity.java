@@ -5,13 +5,12 @@ import com.example.QuizApplication.RequestDto.QuizRequestDto;
 import com.example.QuizApplication.ResponseDto.QuizResponseDto;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ConvertToEntity {
 
     public static QuizResponseDto convertQuizEntityToQuizResponseDto(QuizEntity quizEntity){
 
-        QuizResponseDto quizResponseDto= QuizResponseDto.builder().question(quizEntity.getQuestion())
+        QuizResponseDto quizResponseDto= QuizResponseDto.builder().question(quizEntity.getQuestion()).options(quizEntity.getOptions())
                 .build();
 
         return quizResponseDto;
@@ -24,7 +23,10 @@ public class ConvertToEntity {
                 .rightAnswer(quizRequestDto.getRightAnswer()).options(quizRequestDto.getOptions())
                 .build();
 
-        //List<String> list=
+
+        //quiz.setOptions(optionsList);
         return quiz;
     }
 }
+
+

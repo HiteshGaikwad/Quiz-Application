@@ -25,11 +25,6 @@ public class QuizService {
     @Autowired
     QuizRepository quizRepository;
 
-//    @Autowired
-//    RedisTemplate<Integer,QuizEntity> redisTemplate;
-//
-//    @Autowired
-//    ObjectMapper objectMapper;
 
 
     //function to create a quiz
@@ -37,9 +32,6 @@ public class QuizService {
 
         QuizEntity quiz= ConvertToEntity.convertQuizRequestDtoToQuizEntity(quizRequestDto);
 
-//        List<String> list= Arrays.asList(quiz.getOptions().toString());
-//
-//        quiz.setOptions(list);
 
         //Initially status of the quiz will be Inactive
         quiz.setStatus(Status.INACTIVE);
@@ -47,20 +39,8 @@ public class QuizService {
         //saving quiz to the repository
         quizRepository.save(quiz);
 
-//        //Saving quiz to Cache
-//        saveInCache(quiz);
     }
 
-
-
-//    //Implementing saveInCache function to save the Quiz in cache memory
-//    public void saveInCache(QuizEntity quiz){
-//
-//        Map map = objectMapper.convertValue(quiz,Map.class);
-//
-//        redisTemplate.opsForHash().putAll(quiz.getId(),map);
-//        redisTemplate.expire(quiz.getId(), Duration.ofHours(12));
-//    }
 
 
     //function to get Active quiz at the current date and time
@@ -83,23 +63,10 @@ public class QuizService {
     //function to get result of the quiz by Id
     public String getResultOfQuizById(int id) {
 
-//        //first find it in the Cache memory
-//        Map map= redisTemplate.opsForHash().entries(id);
-//
-//        QuizEntity quiz=null;
 
-        //if not found inside the cache memory then check in the database
-       // if(map==null) {
             //Retrieving quiz from the repository by the id
             QuizEntity quiz = quizRepository.findById(id).get();
 
-//             //save in the cache memory
-//            saveInCache(quiz);
-//
-//        } else{
-//            //found inside the cache memory
-//            quiz= objectMapper.convertValue(map, QuizEntity.class);
-//        }
 
         LocalDateTime now= LocalDateTime.now();
 
@@ -108,8 +75,9 @@ public class QuizService {
 
             //if yes then user should get to see the result of the specified id of the Quiz
             int index = quiz.getRightAnswer();
-            List<String> option = quiz.getOptions();
-            String answer = option.get(index);
+            String option = quiz.getOptions();
+            List<String> options= Arrays.asList(option.split(" "));
+            String answer = options.get(index);
             return answer;
         }
         //if it's not been 5 minutes plus since the finished time of the quiz then user should not be able to see the result

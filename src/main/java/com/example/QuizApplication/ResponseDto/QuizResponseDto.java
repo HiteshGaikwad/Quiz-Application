@@ -15,6 +15,6 @@ public class QuizResponseDto {
 
     private String question;
 
-    private List<String> options;
+    private String options;
 
 }

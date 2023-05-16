@@ -1,11 +1,11 @@
 package com.example.QuizApplication.Entity;
 
 import com.example.QuizApplication.Enums.Status;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name="quizzes")
@@ -21,7 +21,7 @@ public class QuizEntity {
 
     private String question;
 
-    private List<String> options;
+    private String options;
 
     private int rightAnswer;
 

@@ -16,7 +16,7 @@ public class QuizRequestDto {
 
     private String question;
 
-    private List<String> options;
+    private String options;
 
     private int rightAnswer;
 
