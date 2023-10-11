@@ -1,16 +1,16 @@
 package com.example.QuizApplication.RequestDto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-@Data
+//@Data
 @AllArgsConstructor
+@Setter
+@Getter
 @NoArgsConstructor
 public class QuizRequestDto {
 

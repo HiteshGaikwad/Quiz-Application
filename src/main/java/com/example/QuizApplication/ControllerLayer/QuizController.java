@@ -64,12 +64,13 @@ public class QuizController {
     public ResponseEntity<String> getResultOfQuizById(@PathVariable("id") int id){
 
         if(bucket.tryConsume(1)) {
-            try {
-                String answer = quizService.getResultOfQuizById(id);
-                return new ResponseEntity<>(answer, HttpStatus.FOUND);
+            String answer = quizService.getResultOfQuizById(id);
 
-            } catch (NullPointerException e) {
+            if(answer==null){
                 return new ResponseEntity<>("Id not found, enter valid Id", HttpStatus.NOT_FOUND);
+            }
+            else{
+                return new ResponseEntity<>(answer, HttpStatus.FOUND);
             }
         }
         return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();

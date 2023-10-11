@@ -61,12 +61,13 @@ public class QuizService {
 
 
     //function to get result of the quiz by Id
-    public String getResultOfQuizById(int id) {
-
+    public String getResultOfQuizById(int id){
 
             //Retrieving quiz from the repository by the id
-            QuizEntity quiz = quizRepository.findById(id).get();
-
+            QuizEntity  quiz = quizRepository.findById(id).orElse(null);
+            if(quiz==null){
+                return "Quiz of this ID is not present, Enter valid ID.";
+            }
 
         LocalDateTime now= LocalDateTime.now();
 
@@ -76,7 +77,7 @@ public class QuizService {
             //if yes then user should get to see the result of the specified id of the Quiz
             int index = quiz.getRightAnswer();
             String option = quiz.getOptions();
-            List<String> options= Arrays.asList(option.split(" "));
+            List<String> options= Arrays.asList(option.split("/"));
             String answer = options.get(index);
             return answer;
         }

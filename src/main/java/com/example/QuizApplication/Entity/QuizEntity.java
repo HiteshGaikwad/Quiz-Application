@@ -9,10 +9,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="quizzes")
-@Data
+//@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class QuizEntity {
 
     @Id
